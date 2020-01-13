@@ -14,7 +14,7 @@ jupyter:
 ---
 
 # Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+Daniel Heyde
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,7 +36,8 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+Is there a good guide for NumPy in particular?
+
 
 
 ## Exercises 1-7
@@ -46,46 +47,81 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+a = np.ones((6, 4), dtype=int) * 2
+a
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.ones((6, 4), dtype=int)
+np.fill_diagonal(b, 3)
+b
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+a * b
+# * is element by element multiplication
+# dot is matrix multiplication so the inner dimensions must match
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+print(np.dot(a.transpose(), b))
+print(np.dot(a, b.transpose()))
+
+# the resulting arrays are of different sizes because the 
+# dot product's result takes on a shape based on the outer dimensions
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def old_macdonald():
+    print("EIEIO")
+    
+old_macdonald()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+import random
+
+def print_rand_arr():
+    arr = []
+    for i in range(random.randint(1, 10)):
+        arr.append(random.randint(-15, 15))
+    print(arr)
+    print(np.mean(arr))
+    print(np.sum(arr))
+    return arr
+
+print_rand_arr()
+print_rand_arr()
+print_rand_arr()
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+def count_ones(arr):
+    count = 0
+    for i in range(len(arr)):
+        if (arr[i] == 1):
+            count+=1
+    return count
+
+def count_ones_where(arr):
+    ones = np.where(1, arr, None)
+    return len(ones)
+
+print(count_ones([1, 2, 1, 3, 4, 1]))
+print(count_ones_where([1, 2, 1, 3, 4, 1]))
 ```
 
 ## Excercises 8-???
@@ -96,28 +132,44 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+a = pd.DataFrame(np.ones((6, 4)) * 2)
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+b = pd.DataFrame(np.ones((6, 4)), dtype=int)
+b.iloc[range(4), range(4)] = 3
+b
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+pd.DataFrame.multiply(a, b)
+# same answer as above, the matrices sizes arent compatible for dot product matrix multiplication
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+def count_ones(df):
+    count = 0
+    for i in range(len(df)):
+        if (df.iloc[i, 0] == 1):
+            count+=1
+    return count
+
+def count_ones_where(df):
+    ones = df.where(df == 1, 0)
+    return ones.sum()[0]
+
+print(count_ones(pd.DataFrame([1, 2, 1, 3, 4, 1])))
+print(count_ones_where(pd.DataFrame([1, 2, 1, 3, 4, 1])))
 ```
 
 ## Exercises 12-14
@@ -137,7 +189,7 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.name
 ```
 
 ## Exercise 13
@@ -146,13 +198,15 @@ After setting the index to ``sex``, how do you select all passengers that are ``
 ```python
 ## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+titanic_df.loc['female']
+len(titanic_df.loc['female'])
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.reset_index()
 ```
 
 ```python

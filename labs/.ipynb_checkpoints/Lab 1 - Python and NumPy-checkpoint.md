@@ -14,7 +14,7 @@ jupyter:
 ---
 
 # Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+Daniel Heyde
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,7 +36,8 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+Is there a good guide for NumPy in particular?
+
 
 
 ## Exercises 1-7
@@ -46,46 +47,85 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+a = np.ones((6, 4)) * 2
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.ones((6, 4))
+np.fill_diagonal(b, 3)
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+a * b
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+print(np.dot(a.transpose(), b))
+print(np.dot(a, b.transpose()))
+
+# the resulting arrays are of different sizes because the 
+# dot product's result takes on a shape based on the 2nd array's width
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def old_macdonald():
+    print("EIEIO")
+    
+old_macdonald()
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+import random
+
+def rand_arr():
+    arr = []
+    for i in range(random.randint(1, 10)):
+        arr.append(random.randint(-15, 15))
+    return arr
+
+a1 = rand_arr()
+print(a1)
+print(np.mean(a1))
+print(np.sum(a1))
+
+a2 = rand_arr()
+print(a2)
+print(np.mean(a2))
+print(np.sum(a2))
+
+a3 = rand_arr()
+print(a3)
+print(np.mean(a3))
+print(np.sum(a3))
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+def count_ones(arr):
+    count = 0
+    for i in range(len(arr)):
+        if (arr[i] == 1):
+            count+=1
+    return count
+
+def count_ones_where(arr):
+    ones = np.where(1, arr, None)
+    return len(ones)
+
+print(count_ones([1, 2, 1, 3, 4, 1]))
+print(count_ones_where([1, 2, 1, 3, 4, 1]))
 ```
 
 ## Excercises 8-???
